@@ -1,0 +1,104 @@
+<div class="header">
+  <div class="content">Header content</div>
+
+  <button
+    class="e-icons"
+    (click)="onOpenDialog($event)"
+    id="targetButton"
+    ejs-button
+  ></button>
+</div>
+<div #container class="root-container"></div>
+<ejs-dialog
+  id="dialog"
+  #ejDialog
+  isModal="true"
+  (overlayClick)="onOverlayClick()"
+  content="This is a modal dialog"
+  width="500px"
+  [header]="header"
+  [visible]="dialogVisibility"
+  [showCloseIcon]="showCloseIcon"
+>
+  <ng-template #content>
+    <form id="template_driven" [formGroup]="batchForm">
+      <div class="form-group">
+        <label class="dialog-uplaod-label" for="alterEgo"
+          >Upload New Batch</label
+        >
+        <br />
+        <ejs-uploader
+          id="dialog-upload"
+          #defaultupload
+          [autoUpload]="false"
+        ></ejs-uploader>
+      </div>
+      <p>
+        Upload the data similar to the format specified in the<span
+          style="color: #008cff"
+        >
+          Sample Document</span
+        >
+      </p>
+      <div class="form-group">
+        <label for="alterEgo">Batch Name</label>
+        <br />
+        <input
+          class="dialog-input"
+          placeholder="Eg. Batch_01.csv"
+          type="text"
+        />
+      </div>
+      <div class="form-group">
+        <label for="alterEgo">Input Format</label>
+        <br />
+        <ejs-dropdownlist
+          id="ddlelement"
+          #ddlelement
+          [dataSource]="data"
+          [placeholder]="placeholder"
+        ></ejs-dropdownlist>
+      </div>
+      <div class="form-group">
+        <label for="alterEgo">Output Format</label>
+        <br />
+        <ejs-dropdownlist
+          id="ddlelement"
+          #ddlelement
+          [dataSource]="data"
+          [placeholder]="placeholder"
+        ></ejs-dropdownlist>
+      </div>
+      <div class="form-group">
+        <label for="alterEgo">Description</label>
+        <br />
+        <textarea
+          class="dialog-textarea"
+          name=""
+          id=""
+          cols="30"
+          rows="10"
+          placeholed="Type your text here"
+        >
+        </textarea>
+      </div>
+      <div class="form-group">
+        <label for="alterEgo">Reference</label>
+        <br />
+        <input class="dialog-input" type="text" />
+      </div>
+      <button
+        ejs-button
+        type="submit"
+        style="background-color: #6175f6; color: #fff; margin: 1rem"
+        class="btn btn-success"
+        (click)="addBatch()"
+      >
+        Submit
+      </button>
+    </form>
+  </ng-template>
+</ejs-dialog>
+<div #container class="root-container"></div>
+<div #container id="container"></div>
+<router-outlet></router-outlet>

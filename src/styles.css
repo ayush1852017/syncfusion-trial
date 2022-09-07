@@ -1,0 +1,30 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans:wght@300&display=swap"); */
+@import "../node_modules/@syncfusion/ej2-base/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-buttons/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-calendars/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-dropdowns/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-inputs/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-navigations/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-popups/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-angular-grids/styles/material.css";
+@import "../node_modules/@syncfusion/ej2/bootstrap-dark.css";
+@import "../node_modules/@syncfusion/ej2/bootstrap4.css";
+@import "../node_modules/@syncfusion/ej2/tailwind-dark.css";
+@import "../node_modules/@syncfusion/ej2/material.css";
+@import "../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-richtexteditor/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-inplace-editor/styles/material.css";
+
+/* @font-face {
+  font-family: "Oxygen";
+  src: local("Oxygen"), url(./assets/Flaviotte.ttf) format("truetype");
+} */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+  font-family: "Noto Sans", sans-serif;
+  /* font-family: "Oxygen", Arial, Helvetica, sans-serif; */
+}

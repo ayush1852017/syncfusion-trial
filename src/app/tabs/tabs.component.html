@@ -1,0 +1,560 @@
+<ejs-tab id="element">
+  <e-tabitems>
+    <e-tabitem>
+      <ng-template #headerText>
+        <div>In Queue</div>
+      </ng-template>
+      <ng-template #content>
+        <ejs-grid
+          [enableVirtualization]="true"
+          [enableColumnVirtualization]="true"
+          [dataSource]="queueData"
+          [searchSettings]="searchOptions"
+          (queryCellInfo)="tooltip($event)"
+          [toolbar]="[toolbarOptions, toolbar]"
+          [allowReordering]="true"
+          height="472px"
+          allowPaging="true"
+          [pageSettings]="pageSettings"
+          id="Grid"
+          [allowFiltering]="true"
+          [filterSettings]="filterOption"
+          [editSettings]="editSettings"
+          (actionBegin)="actionBegin($event)"
+          [selectionSettings]="selectionOptions"
+          [allowSorting]="true"
+          [contextMenuItems]="contextMenuItems"
+          (contextMenuClick)="contextMenuClick($event)"
+        >
+          <e-columns>
+            <e-column
+              field="OrderID"
+              headerText="Order ID"
+              width="120"
+              (mouseover)="changeText = true"
+              (mouseout)="changeText = false"
+            ></e-column>
+            <e-column
+              field="CustomerID"
+              headerText="Customer ID"
+              width="150"
+            ></e-column>
+            <e-column
+              field
+              headerText="Tags"
+              width="140"
+              [allowEditing]="false"
+            >
+              <ng-template #filterTemplate let-data>
+                <ejs-dropdownlist
+                  id="dropdown"
+                  [(ngModel)]="data.CustomerID"
+                  [dataSource]="dropdata"
+                  [fields]="fields"
+                  [popupHeight]="height"
+                ></ejs-dropdownlist>
+              </ng-template>
+              <ng-template #template>
+                <button
+                  ejs-button
+                  id="toggle"
+                  class="e-btn e-info"
+                  (click)="zoom()"
+                  ejs-button
+                  cssClass="e-link"
+                  class="tag-btn"
+                ></button>
+              </ng-template>
+            </e-column>
+            <e-column
+              field="Freight"
+              headerText="Freight"
+              format="C"
+              width="120"
+            ></e-column>
+
+            <e-column field headerText="ETA" width="140">
+              <ng-template #template let-data>
+                <ejs-datetimepicker
+                  class="datetimepicker"
+                  [value]="date"
+                  [min]="minDate"
+                  [max]="maxDate"
+                ></ejs-datetimepicker>
+              </ng-template>
+              <!-- <button>Change</button> -->
+            </e-column>
+            <e-column
+              field="OrderDate"
+              headerText="Order Date"
+              format="yMd"
+              width="140"
+            ></e-column>
+            <e-column
+              field="Category"
+              headerText="Category"
+              format="yMd"
+              width="140"
+            >
+              <ng-template let-data #template>
+                <ejs-dropdownlist
+                  id="CustomerID"
+                  name="CustomerID"
+                  [dataSource]="customerIDDistinctData"
+                  [fields]="fields"
+                  value="{{ data.CustomerID }}"
+                  popupHeight="300px"
+                >
+                </ejs-dropdownlist>
+              </ng-template> </e-column
+            ><e-column
+              field="Comments"
+              headerText="Comments"
+              format="yMd"
+              width="140"
+              [allowEditing]="false"
+            >
+              <ng-template #template let-data>
+                <img
+                  (click)="openComment()"
+                  src="	https://r2e.app-staging.datax.ai/assets/images/message.svg"
+                  alt=""
+                /> </ng-template
+            ></e-column>
+          </e-columns>
+        </ejs-grid>
+      </ng-template>
+    </e-tabitem>
+    <e-tabitem>
+      <ng-template #headerText>
+        <div>In Progress</div>
+      </ng-template>
+      <ng-template #content>
+        <ejs-grid
+          [dataSource]="progressData"
+          [searchSettings]="searchOptions"
+          [toolbar]="toolbarOptions"
+          [toolbar]="toolbar"
+          height="472px"
+          allowPaging="true"
+          [pageSettings]="pageSettings"
+          [allowFiltering]="true"
+          [filterSettings]="filterOption"
+          [editSettings]="editSettings"
+          (actionBegin)="actionBegin($event)"
+        >
+          <e-columns>
+            <e-column
+              field="OrderID"
+              headerText="Order ID"
+              width="120"
+            ></e-column>
+            <e-column
+              field="CustomerID"
+              headerText="Customer ID"
+              width="150"
+            ></e-column>
+
+            <e-column field headerText="Tags" width="140">
+              <ng-template #template>
+                <button
+                  ejs-button
+                  id="toggle"
+                  class="e-btn e-info"
+                  (click)="zoom()"
+                  ejs-button
+                  cssClass="e-link"
+                  class="tag-btn"
+                ></button>
+              </ng-template>
+            </e-column>
+            <e-column
+              field="Freight"
+              headerText="Freight"
+              format="C"
+              width="120"
+            ></e-column>
+
+            <e-column field headerText="ETA" width="140">
+              <ng-template #template let-data>
+                <ejs-datetimepicker
+                  class="datetimepicker"
+                  [value]="date"
+                  [min]="minDate"
+                  [max]="maxDate"
+                ></ejs-datetimepicker>
+              </ng-template>
+              <!-- <button>Change</button> -->
+            </e-column>
+            <e-column
+              field="OrderDate"
+              headerText="Order Date"
+              format="yMd"
+              width="140"
+            ></e-column
+            ><e-column
+              field="Comments"
+              headerText="Comments"
+              format="yMd"
+              width="140"
+              [allowEditing]="false"
+            >
+              <ng-template #template let-data>
+                <img
+                  (click)="openComment()"
+                  src="	https://r2e.app-staging.datax.ai/assets/images/message.svg"
+                  alt=""
+                /> </ng-template
+            ></e-column>
+          </e-columns>
+        </ejs-grid>
+      </ng-template>
+    </e-tabitem>
+    <e-tabitem>
+      <ng-template #headerText>
+        <div>Processed</div>
+      </ng-template>
+      <ng-template #content>
+        <ejs-grid
+          [dataSource]="processedData"
+          [searchSettings]="searchOptions"
+          [toolbar]="toolbarOptions"
+          [toolbar]="toolbar"
+          height="472px"
+          allowPaging="true"
+          [pageSettings]="pageSettings"
+          [allowFiltering]="true"
+          [filterSettings]="filterOption"
+          [editSettings]="editSettings"
+          (actionBegin)="actionBegin($event)"
+        >
+          <e-columns>
+            <e-column
+              field="OrderID"
+              headerText="Order ID"
+              width="120"
+            ></e-column>
+            <e-column
+              field="CustomerID"
+              headerText="Customer ID"
+              width="150"
+            ></e-column>
+            <e-column
+              field
+              headerText="Tags"
+              width="140"
+              [allowEditing]="false"
+            >
+              <ng-template #template>
+                <button
+                  ejs-button
+                  id="toggle"
+                  class="e-btn e-info"
+                  (click)="zoom()"
+                  ejs-button
+                  cssClass="e-link"
+                  class="tag-btn"
+                ></button>
+              </ng-template>
+            </e-column>
+            <e-column
+              field="Freight"
+              headerText="Freight"
+              format="C"
+              width="120"
+            ></e-column>
+
+            <e-column field headerText="ETA" width="140">
+              <ng-template #template let-data>
+                <ejs-datetimepicker
+                  class="datetimepicker"
+                  [value]="date"
+                  [min]="minDate"
+                  [max]="maxDate"
+                ></ejs-datetimepicker>
+              </ng-template>
+              <!-- <button>Change</button> -->
+            </e-column>
+            <e-column
+              field="OrderDate"
+              headerText="Order Date"
+              format="yMd"
+              width="140"
+            ></e-column
+            ><e-column
+              field="Comments"
+              headerText="Comments"
+              format="yMd"
+              width="140"
+              [allowEditing]="false"
+            >
+              <ng-template #template let-data>
+                <img
+                  (click)="openComment()"
+                  src="	https://r2e.app-staging.datax.ai/assets/images/message.svg"
+                  alt=""
+                /> </ng-template
+            ></e-column>
+          </e-columns>
+        </ejs-grid>
+      </ng-template>
+    </e-tabitem>
+    <e-tabitem>
+      <ng-template #headerText>
+        <div>Approved</div>
+      </ng-template>
+      <ng-template #content>
+        <ejs-grid
+          [dataSource]="approvedData"
+          [searchSettings]="searchOptions"
+          [toolbar]="toolbarOptions"
+          [toolbar]="toolbar"
+          height="472px"
+          allowPaging="true"
+          [pageSettings]="pageSettings"
+          [allowFiltering]="true"
+          [filterSettings]="filterOption"
+          [editSettings]="editSettings"
+          (actionBegin)="actionBegin($event)"
+        >
+          <e-columns>
+            <e-column
+              field="OrderID"
+              headerText="Order ID"
+              width="120"
+            ></e-column>
+            <e-column
+              field="CustomerID"
+              headerText="Customer ID"
+              width="150"
+            ></e-column>
+            <e-column
+              field
+              headerText="Tags"
+              width="140"
+              [allowEditing]="false"
+            >
+              <ng-template #template>
+                <button
+                  ejs-button
+                  id="toggle"
+                  class="e-btn e-info"
+                  (click)="zoom()"
+                  ejs-button
+                  cssClass="e-link"
+                  class="tag-btn"
+                ></button>
+              </ng-template>
+            </e-column>
+            <e-column
+              field="Freight"
+              headerText="Freight"
+              format="C"
+              width="120"
+            ></e-column>
+
+            <e-column field headerText="ETA" width="140">
+              <ng-template #template let-data>
+                <ejs-datetimepicker
+                  class="datetimepicker"
+                  [value]="date"
+                  [min]="minDate"
+                  [max]="maxDate"
+                ></ejs-datetimepicker>
+              </ng-template>
+              <!-- <button>Change</button> -->
+            </e-column>
+            <e-column
+              field="OrderDate"
+              headerText="Order Date"
+              format="yMd"
+              width="140"
+            ></e-column
+            ><e-column
+              field="Comments"
+              headerText="Comments"
+              format="yMd"
+              width="140"
+              [allowEditing]="false"
+            >
+              <ng-template #template let-data>
+                <img
+                  (click)="openComment()"
+                  src="	https://r2e.app-staging.datax.ai/assets/images/message.svg"
+                  alt=""
+                /> </ng-template
+            ></e-column>
+          </e-columns>
+        </ejs-grid>
+      </ng-template>
+    </e-tabitem>
+    <e-tabitem>
+      <ng-template #headerText>
+        <div>Cancelled</div>
+      </ng-template>
+      <ng-template #content>
+        <ejs-grid
+          [dataSource]="cancelledData"
+          [searchSettings]="searchOptions"
+          [toolbar]="toolbarOptions"
+          [toolbar]="toolbar"
+          height="472px"
+          allowPaging="true"
+          [pageSettings]="pageSettings"
+          [allowFiltering]="true"
+          [filterSettings]="filterOption"
+          [editSettings]="editSettings"
+          (actionBegin)="actionBegin($event)"
+        >
+          <e-columns>
+            <e-column
+              field="OrderID"
+              headerText="Order ID"
+              width="120"
+            ></e-column>
+            <e-column
+              field="CustomerID"
+              headerText="Customer ID"
+              width="150"
+            ></e-column>
+            <e-column
+              field
+              headerText="Tags"
+              width="140"
+              [allowEditing]="false"
+            >
+              <ng-template #template>
+                <button
+                  ejs-button
+                  id="toggle"
+                  class="e-btn e-info"
+                  (click)="zoom()"
+                  ejs-button
+                  cssClass="e-link"
+                  class="tag-btn"
+                ></button>
+              </ng-template>
+            </e-column>
+            <e-column field headerText="ETA" width="140">
+              <ng-template #template let-data>
+                <ejs-datetimepicker
+                  class="datetimepicker"
+                  [value]="date"
+                  [min]="minDate"
+                  [max]="maxDate"
+                ></ejs-datetimepicker>
+              </ng-template>
+            </e-column>
+            <e-column
+              field="Freight"
+              headerText="Freight"
+              format="C"
+              width="120"
+            ></e-column>
+
+            <e-column
+              field="OrderDate"
+              headerText="Order Date"
+              format="yMd"
+              width="140"
+            ></e-column>
+            <e-column
+              field="Comments"
+              headerText="Comments"
+              format="yMd"
+              width="140"
+              [allowEditing]="false"
+            >
+              <ng-template #template let-data>
+                <img
+                  (click)="openComment()"
+                  src="https://r2e.app-staging.datax.ai/assets/images/message.svg"
+                  alt=""
+                /> </ng-template
+            ></e-column>
+          </e-columns>
+        </ejs-grid>
+      </ng-template>
+    </e-tabitem>
+  </e-tabitems>
+</ejs-tab>
+<ejs-sidebar
+  id="sidebar-element"
+  class="sidebar"
+  #sidebar
+  [closeOnDocumentClick]="closeOnDocumentClick"
+  (created)="onCreated($event)"
+  style="visibility: hidden !important"
+  [position]="position"
+  Type="SidebarType.Push"
+  width="width"
+  height="100vh"
+>
+  <div class="title">
+    <h1>Sidebar content</h1>
+  </div>
+  <div class="center-align sidebar-head">
+    <p>Add tag</p>
+    <img
+      (click)="onCreated($event)"
+      src="https://r2e.app-staging.datax.ai/assets/images/home-page/close.svg"
+      alt=""
+    />
+  </div>
+  <hr style="color: #c2c9d6" />
+  <form id="reactive">
+    <p>Create New Tag</p>
+    <div>
+      <input
+        outline
+        type="text"
+        formControlName="tagName"
+        placeholder="Type your text here..."
+      />
+    </div>
+    <p>Description</p>
+    <div>
+      <textarea
+        name=""
+        id=""
+        cols="30"
+        rows="6"
+        placeholder="Type your text here..."
+        formControlName="description"
+      ></textarea>
+    </div>
+    <h3>Tag color</h3>
+    <div>
+      <div class="color-picker">
+        <input
+          ejs-colorpicker
+          type="color"
+          id="color-picker"
+          mode="Palette"
+          value="fff"
+        />
+      </div>
+    </div>
+  </form>
+</ejs-sidebar>
+
+<router-outlet></router-outlet>
+<ejs-dialog
+  #dialog
+  [buttons]="alertDlgButtons"
+  [visible]="visible"
+  width="200px"
+  height="210px"
+  id="commentDialog"
+  [position]="positionDialog"
+>
+  <textarea
+    name=""
+    id=""
+    cols="20"
+    rows="10"
+    style="border: none"
+    [mentionConfig]="mentionConfig"
+    [(ngModel)]="comment"
+  ></textarea>
+</ejs-dialog>

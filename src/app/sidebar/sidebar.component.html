@@ -1,0 +1,40 @@
+<ejs-sidebar
+  #dockBar
+  id="dockSidebar"
+  [enableDock]="enableDock"
+  [width]="width"
+  [dockSize]="dockSize"
+>
+  <div class="dock">
+    <ul>
+      <li class="sidebar-item" id="toggle" (click)="toggleClick()">
+        <span class="e-icons expand"></span>
+        <span class="e-text" title="menu">Home</span>
+      </li>
+      <li class="sidebar-item">
+        <span class="e-icons home"></span>
+        <span class="e-text" title="home">Review</span>
+      </li>
+      <li class="sidebar-item">
+        <span class="e-icons profile"></span>
+        <span class="e-text" title="profile">Products</span>
+      </li>
+
+      <li class="sidebar-item">
+        <span class="e-icons settings"></span>
+        <span class="e-text" title="settings">Settings</span>
+      </li>
+    </ul>
+  </div>
+</ejs-sidebar>
+<div>
+  <app-tabs
+    [queueData]="queueData"
+    [progressData]="progressData"
+    [processedData]="processedData"
+    [approvedData]="approvedData"
+    [cancelledData]="cancelledData"
+    [toolbarOptions]="toolbarOptions"
+    [searchOptions]="searchOptions"
+  ></app-tabs>
+</div>

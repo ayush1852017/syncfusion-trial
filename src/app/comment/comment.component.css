@@ -1,0 +1,66 @@
+.custom-inplace-editor {
+  min-width: 100% !important;
+  /* position: absolute; */
+  bottom: 10px;
+  flex: 1;
+}
+.comments-container {
+  display: flex;
+  width: 100%;
+  height: 90vh;
+  flex-direction: row;
+  position: absolute;
+  border-bottom: 1px solid grey;
+}
+.comment-left-part {
+  border-left: 1px solid #c0c2c5;
+  flex: 1;
+  background-color: #f1f3f9;
+  overflow-y: scroll;
+}
+#inplace-editor-control {
+  flex: 2 !important;
+  border-left: 1px solid #c0c2c5;
+  overflow-y: scroll;
+  position: relative;
+  height: 100% !important;
+  display: flex;
+  flex-direction: column-reverse;
+}
+/* #inplace-editor-control img {
+  position: absolute;
+  right: 20px;
+  z-index: 1;
+  bottom: 40px;
+} */
+.custom-comments-box {
+  border-radius: 5px;
+  padding: 1em;
+  width: 40%;
+  background-color: #c0c2c5;
+  margin: 1.5em;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+}
+/* .form-group > img {
+  position: absolute;
+  right: 20px;
+  z-index: 1;
+  bottom: 40px;
+} */
+.custom-comment-container {
+  overflow-y: scroll;
+  /* min-height: 400px; */
+  flex: 4;
+}
+p {
+  font-family: Lato;
+}
+.dropdown-menu .scrollable-menu .mention-menu {
+  height: 100px !important;
+  width: 200px !important;
+  color: black;
+}

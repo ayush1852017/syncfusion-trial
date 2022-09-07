@@ -1,0 +1,86 @@
+<div class="comments-container">
+  <div class="comment-left-part">
+    <ng-template #mentionListTemplate let-item="item">
+      <img
+        class="mr-3"
+        src="https://avatars1.githubusercontent.com/u/{{ item.img }}?s=180&v=4"
+        alt=""
+        width="30"
+        height="30"
+      />
+      &nbsp;
+      <span>{{ item.name }}</span>
+    </ng-template>
+  </div>
+  <div
+    class="col-lg-8 control-section inplace-editor-control-section form-layout"
+    #formlayout
+    id="inplace-editor-control"
+  >
+    <form
+      #form="ngForm"
+      class="custom-inplace-editor"
+      [formGroup]="commentForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <div class="form-group">
+        <ejs-richtexteditor
+          #fromRTE
+          [(value)]="value"
+          required
+          formControlName="comment"
+          [mentionConfig]="{
+            triggerChar: '@',
+            items: searchData,
+            labelKey: 'Name'
+          }"
+          [mentionListTemplate]="mentionListTemplate"
+          [(ngModel)]="value"
+        >
+          <!-- <ejs-autocomplete
+            id="atcelement"
+            [dataSource]="searchData"
+            [fields]="fields"
+            [placeholder]="text"
+            [highlight]="highlight"
+          ></ejs-autocomplete> -->
+        </ejs-richtexteditor>
+
+        <button
+          style="background-color: #6175f6; color: #fff; margin: 1rem"
+          type="submit"
+          ejs-button
+        >
+          Send
+        </button>
+      </div>
+    </form>
+    <!-- <div class="custom-comment-container">
+      <div *ngFor="let comment of commentSource" class="custom-comments-box">
+        {{ comment.comment }}
+      </div>
+    </div> -->
+    <ejs-listview
+      #listObj1
+      id="all"
+      [dataSource]="commentSource"
+      cssClass="e-list-template"
+      [fields]="listFields"
+      class="custom-comment-container"
+    >
+      <ng-template #template let-comment="">
+        <div class="e-list-wrapper e-list-avatar e-list-multi-line">
+          <span class="e-avatar e-icon"></span>
+          <span class="e-list-item-header">{{ comment.comment }}</span>
+          <span class="e-list-content">
+            {{ comment.time }}
+          </span>
+        </div>
+      </ng-template>
+    </ejs-listview>
+  </div>
+</div>
+
+<!-- <ng-template #mentionListTemplate let-item="item">
+  <span>{{ item.name }}</span>
+</ng-template> -->
